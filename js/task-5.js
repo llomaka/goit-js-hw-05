@@ -4,7 +4,7 @@
 
 class Car {
   /* Додай статичний метод `getSpecs(car)`, який приймає об'єкт-машину як параметр і виводить в консоль значення властивостей maxSpeed, speed, isOn, distance и price. */
-  static getSpecs({ car }) {
+  static getSpecs(car) {
     console.log(`maxSpeed: ${car.maxSpeed}, speed: ${car.speed}, isOn: ${car.isOn}, distance: ${car.distance}, price: ${car.price}`);
   }
   /* Конструктор отримує об'єкт налаштувань. *
@@ -15,25 +15,28 @@ class Car {
    *  isOn - заведений автомобіль, значення true або false. Спочатку false
    *  distance - загальний кілометраж, спочатку 0
    */
-  speed = 0;
-  isOn = false;
-  distance = 0;
 
-  constructor({ speed, price, maxSpeed, isOn, distance }) {
-    this.speed = speed;
-    this.price = price;
-    this.maxSpeed = maxSpeed;
-    this.isOn = isOn;
-    this.distance = distance;
+  constructor(options) {
+     let default_values ={
+            speed: 0,
+            isOn: false,
+            distance: 0
+        }
+        options = {...default_values, ...options}
+    this.speed = options.speed;
+    this.price = options.price;
+    this.maxSpeed = options.maxSpeed;
+    this.isOn = options.isOn;
+    this.distance = options.distance;
   }
 
   /* Додай геттер і сеттер для властивості price, який буде працювати з властивістю ціни автомобіля. */
   get price() {
-    return this.price;
+    return this._price;
   }
 
-  set price(newPrice) {
-    this.price = newPrice;
+  set price(value) {
+    this._price = value;
   }
 
   /* Додай код для того, щоб завести автомобіль. Записує у властивість isOn значення true */
@@ -67,7 +70,7 @@ class Car {
   /* Додає в поле distance кілометраж (hours * speed), але тільки в тому випадку, якщо машина заведена! */
   drive(hours) {
     if (this.isOn === true) {
-      this.distance = hours * this.speed;
+      this.distance += hours * this.speed;
     }
   }
 }
