@@ -1,15 +1,26 @@
-# Завдання 2
+// # Завдання 2
 
-Напиши клас `User` для створення користувача з наступними властивостями:
+// Напиши клас `User` для створення користувача з наступними властивостями:
 
-- `name` - рядок
-- `age` - число
-- `followers` - число
+// - `name` - рядок
+// - `age` - число
+// - `followers` - число
 
-Добав метод `getInfo()`, який, виводить рядок:
-`User ${ім'я} is ${вік} years old and has ${кількість фоловерів} followers`
+// Добав метод `getInfo()`, який, виводить рядок:
+// `User ${ім'я} is ${вік} years old and has ${кількість фоловерів} followers`
 
-```js
+class User {
+  constructor({ name, age, followers }) {
+    this.name = name;
+    this.age = age;
+    this.followers = followers;
+  }
+
+  getInfo() {
+    console.log(`User ${this.name} is ${this.age} years old and has ${this.followers} followers`);
+  }
+}
+
 const mango = new User({
   name: 'Mango',
   age: 2,
@@ -25,4 +36,3 @@ const poly = new User({
 });
 
 poly.getInfo(); // User Poly is 3 years old and has 17 followers
-```

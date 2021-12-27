@@ -4,9 +4,13 @@
 // і `email`. В `prototype` функції-конструктора добав метод `getInfo()`, який
 // виводить в консоль значення полів `login` і `email` об'єкта який його викликав.
 
-const Account = {
-    login: 'someLogin',
-    email: 'email@mail.com',
+function Account({ login, email }) {
+  this.login = login;
+  this.email = email;
+}
+
+Account.prototype.getInfo = function() {
+  console.log(`Login: ${this.login}, Email: ${this.email}`);
 }
 
 console.log(Account.prototype.getInfo); // function

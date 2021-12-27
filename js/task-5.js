@@ -1,18 +1,13 @@
-# Завдання 5
+// # Завдання 5
 
-Напиши клас `Car` із зазначеними властивостями і методами.
+// Напиши клас `Car` із зазначеними властивостями і методами.
 
-```js
 class Car {
-  /*
-   * Додай статичний метод `getSpecs(car)`,
-   * який приймає об'єкт-машину як параметр і виводить
-   * в консоль значення властивостей maxSpeed, speed, isOn, distance и price.
-   */
-
-  /*
-   * Конструктор отримує об'єкт налаштувань.
-   *
+  /* Додай статичний метод `getSpecs(car)`, який приймає об'єкт-машину як параметр і виводить в консоль значення властивостей maxSpeed, speed, isOn, distance и price. */
+  static getSpecs({ car }) {
+    console.log(`maxSpeed: ${car.maxSpeed}, speed: ${car.speed}, isOn: ${car.isOn}, distance: ${car.distance}, price: ${car.price}`);
+  }
+  /* Конструктор отримує об'єкт налаштувань. *
    * Додай властивості майбутнього екземпляра класу:
    *  speed - поточна швидкість, початкова 0
    *  price - ціна автомобіля
@@ -20,44 +15,61 @@ class Car {
    *  isOn - заведений автомобіль, значення true або false. Спочатку false
    *  distance - загальний кілометраж, спочатку 0
    */
-  constructor() {}
+  speed = 0;
+  isOn = false;
+  distance = 0;
 
-  /*
-   * Додай геттер і сеттер для властивості price,
-   * який буде працювати з властивістю ціни автомобіля.
-   */
+  constructor({ speed, price, maxSpeed, isOn, distance }) {
+    this.speed = speed;
+    this.price = price;
+    this.maxSpeed = maxSpeed;
+    this.isOn = isOn;
+    this.distance = distance;
+  }
 
-  /*
-   * Додай код для того, щоб завести автомобіль
-   * Записує у властивість isOn значення true
-   */
-  turnOn() {}
+  /* Додай геттер і сеттер для властивості price, який буде працювати з властивістю ціни автомобіля. */
+  get price() {
+    return this.price;
+  }
 
-  /*
-   * Додай код для того, щоб заглушити автомобіль
-   * Записує у властивість isOn значення false,
-   * і скидає поточну швидкість в 0
-   */
-  turnOff() {}
+  set price(newPrice) {
+    this.price = newPrice;
+  }
 
-  /*
-   * Додає до властивості speed отримане значення,
-   * за умови, що результуюча швидкість
-   * не більше, ніж значення властивості maxSpeed
-   */
-  accelerate(value) {}
+  /* Додай код для того, щоб завести автомобіль. Записує у властивість isOn значення true */
+  turnOn() {
+    this.isOn = true;
+  }
 
-  /*
-   * Забирає від властивості speed отримане значення,
-   * за умови, що результуюча швидкість не менше нуля
-   */
-  decelerate(value) {}
+  //  * Додай код для того, щоб заглушити автомобіль
+  //  * Записує у властивість isOn значення false, і скидає поточну швидкість в 0
+  
+  turnOff() {
+    this.isOn = false;
+    this.speed = 0;
+  }
 
-  /*
-   * Додає в поле distance кілометраж (hours * speed),
-   * але тільки в тому випадку, якщо машина заведена!
-   */
-  drive(hours) {}
+  //  * Додає до властивості speed отримане значення, за умови, що результуюча швидкість не більше, ніж значення властивості maxSpeed
+
+  accelerate(value) {
+    if (this.speed + value <= this.maxSpeed) {
+      this.speed += value;
+    }
+  }
+
+  //  * Забирає від властивості speed отримане значення, за умови, що результуюча швидкість не менше нуля
+  decelerate(value) {
+    if (this.speed - value >= 0) {
+      this.speed -= value;
+    }
+  }
+
+  /* Додає в поле distance кілометраж (hours * speed), але тільки в тому випадку, якщо машина заведена! */
+  drive(hours) {
+    if (this.isOn === true) {
+      this.distance = hours * this.speed;
+    }
+  }
 }
 
 const mustang = new Car({ maxSpeed: 200, price: 2000 });
